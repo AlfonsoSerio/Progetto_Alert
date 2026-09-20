@@ -1,0 +1,145 @@
+================================================================================
+QUOTE TRACKER - VERSION 1.0
+================================================================================
+
+Release Date: 2026-09-20
+Author: Alfonso (serioalfonso@hotmail.it)
+Purpose: Standalone quote opening monitoring for value betting
+
+================================================================================
+FEATURES v1.0
+================================================================================
+
+✅ Core Features:
+   - Monitoraggio apertura quote su Flashscore (gratis)
+   - Check ogni 30 minuti (frequenza massima gratuita)
+   - Notifiche Telegram istantanee quando quote SI APRONO
+   - CSV-based match tracking (facile da aggiornare manualmente)
+   - Status tracking per ogni partita (checking/waiting/notified/not_found)
+
+✅ Deployment:
+   - Railway.app support (€5/mese, sempre acceso)
+   - Standalone (non integrato con alert.py per ora)
+   - Loop infinito con cicli da 30 minuti
+   - Log persistente locale (quote_tracker.log)
+
+✅ Developer Features:
+   - Python 3.7+ (BeautifulSoup4 + pandas + requests)
+   - Logging completo (file + console)
+   - Error handling robusto
+   - Test utility (test_quote_tracker.py)
+
+✅ Documentation:
+   - README_QUOTE_TRACKER.md (quick start)
+   - SETUP_RAILWAY_QUOTE_TRACKER.md (guida deployment completa)
+   - Procfile per Railway
+   - .env.example per configurazione
+
+================================================================================
+WHAT'S INCLUDED
+================================================================================
+
+quote_tracker.py              Main script (300+ lines)
+matches_to_track.csv          Template CSV + sample data
+requirements.txt              Dependencies (pandas, requests, BeautifulSoup4, python-dotenv)
+.env.example                  Template variabili Telegram
+Procfile                      Railway configuration
+test_quote_tracker.py         Testing utility
+README_QUOTE_TRACKER.md       Quick start guide
+SETUP_RAILWAY_QUOTE_TRACKER.md Full deployment guide
+VERSION.txt                   This file
+
+================================================================================
+COSTI
+================================================================================
+
+Railway (€5/mese)  →  Server sempre acceso 24/7
+Flashscore        →  Gratis (scraping pubblico)
+Telegram          →  Gratis (bot pubblico)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TOTAL: €5/mese
+
+================================================================================
+WHAT'S NOT INCLUDED (per il momento)
+================================================================================
+
+❌ Integration con alert.py (standalone per ora)
+❌ Web dashboard (solo CSV + logs)
+❌ SMS notifications (solo Telegram)
+❌ Multiple language support per notifiche (English only per ora)
+❌ Quote history tracking (solo apertura, non valori)
+
+================================================================================
+NEXT VERSIONS (Roadmap)
+================================================================================
+
+v1.1 (optional):
+   - ✏️ Notifiche in italiano
+   - ✏️ Quote value tracking (registra odds quando si aprono)
+   - ✏️ Multi-match comparison (quale mercato apre prima?)
+
+v1.2 (futuro):
+   - 🔗 Integration con alert.py
+   - 📊 Web dashboard (visualizza CSV + logs)
+   - 📈 Historical data (quante volte quote si aprono prima/dopo)
+
+v2.0 (considerazioni future):
+   - 🎲 Odds API integration (se budget consente)
+   - 📱 Notifiche push iOS/Android
+   - 🤖 ML per predire quando quote si apriranno
+
+================================================================================
+KNOWN ISSUES / LIMITATIONS
+================================================================================
+
+1. Flashscore HTML parsing è fragile
+   → Se Flashscore cambia struttura HTML, il parser si rompe
+   → Soluzione: usare Flashscore ufficiale API (€99/mese)
+
+2. 30 minuti è frequenza massima GRATUITA
+   → Per <5 minuti servirebbe API pagata
+   → Tradeoff: cost vs accuracy
+
+3. Non persiste la storia tra deploys
+   → Se Railway riavvia, il contatore di 30 min riparte
+   → Soluzione: logare su DB esterno (futuro)
+
+4. Un solo Telegram chat_id
+   → Non puoi notificare più chat contemporaneamente
+   → Soluzione: creare più bot (gratis ma manuale)
+
+================================================================================
+HOW TO START
+================================================================================
+
+Locale (testing):
+   1. pip install -r requirements.txt
+   2. cp .env.example .env
+   3. Edita .env con TELEGRAM_TOKEN e TELEGRAM_CHAT_ID
+   4. Edita matches_to_track.csv con partite da monitorare
+   5. python quote_tracker.py
+
+Railway (produzione):
+   1. Leggi SETUP_RAILWAY_QUOTE_TRACKER.md
+   2. Segui i step per caricare su Railway
+   3. Configura variabili Telegram in Settings → Variables
+   4. Railway esegue automaticamente ogni 30 minuti
+
+Testing:
+   1. python test_quote_tracker.py --test-flashscore
+   2. python test_quote_tracker.py --test-telegram
+   3. python test_quote_tracker.py --test-csv
+   4. python test_quote_tracker.py (ciclo completo)
+
+================================================================================
+SUPPORT
+================================================================================
+
+Se hai problemi:
+1. Controlla i log: quote_tracker.log (locale) o Railway dashboard (cloud)
+2. Verifica la guida troubleshooting in SETUP_RAILWAY_QUOTE_TRACKER.md
+3. Testa ogni componente con test_quote_tracker.py
+
+================================================================================
+END OF VERSION 1.0
+================================================================================
